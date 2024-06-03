@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DX Talks | D-Explore-X</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <style>
+        body {
+            background-color: #1a202c; /* Dark background color */
+            color: #cbd5e0; /* Light text color */
+            font-family: sans-serif; /* Default font family */
+        }
+
+        .message-container {
+            background-color: #2d3748; /* Dark prompt box background color */
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .message-container p {
+            margin: 0;
+        }
+
+        #chat {
+            width: 100%; /* Adjust width as needed */
+            padding: 10px;
+            background-color: #2d3748; /* Dark input field background color */
+            border: 1px solid #4a5568; /* Dark border color */
+            color: #cbd5e0; /* Light text color */
+            outline: none; /* Remove focus outline */
+            border-radius: 8px;
+        }
+
+        #btn {
+            background-color: #4a5568; /* Dark send button background color */
+            color: #cbd5e0; /* Light send button text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #btn:hover {
+            background-color: #718096; /* Dark send button background color on hover */
+        }
+
+        #clearBtn {
+            background-color: #c53030; /* Dark clear button background color */
+            color: #fff; /* Light clear button text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #clearBtn:hover {
+            background-color: #e53e3e; /* Dark clear button background color on hover */
+        }
+
+        #messageHolder {
+            max-height: 80vh; /* Max height to enable scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .text-green-500 {
+            color: #48bb78; /* Dark green color */
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-between h-screen">
+    <div>
+        <p class="text-xl font-bold text-center text-green-500">
+            DX Talks - Splendid chat Bot
+        </p>
+        <div id="messageHolder" class="overflow-y-auto m-4"></div>
+    </div>
+    <div class="flex flex-row m-4">
+        <input type="text" class="flex-1 border rounded-md m-2 border-green-600 p-2 outline-none ring-2 ring-green-600 border-transparent" placeholder="Chat..." name="chat" id="chat" />
+        <button id="btn" class="m-2 bg-blue-500 p-2 rounded-md text-white">Send</button>
+        <button id="clearBtn" class="m-2 bg-red-500 p-2 rounded-md text-white">Clear</button>
+    </div>
+    <script type="importmap">
+    {
+        "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+    }
+    </script>
+    <script type="module" src="{{ url_for('static', filename='main.js') }}"></script>
+
+    <script>
+        document.getElementById("clearBtn").addEventListener("click", function () {
+            clearChatHistory();
+        });
+
+        function clearChatHistory() {
+            document.getElementById("messageHolder").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
